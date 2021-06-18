@@ -1,3 +1,3 @@
 @Library('centralrepo@main') _
-sampleNew1 
+sampleNew1 'hello'
 
