@@ -1,6 +1,6 @@
 @Library('centralrepo@main') _
 sampleNew1 {[
-    brname = 'test'
+    brname = 'test',
     name = 'jaffa'
 ]}
 
