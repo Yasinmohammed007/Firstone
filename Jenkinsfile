@@ -1,6 +1,7 @@
 @Library('centralrepo@main') _
 sampleNew1 {[
     brname = 'test',
-    name = 'jaffa'
+    name = 'jaffa',
+    list_task = ['checkout','deploy']
 ]}
 
