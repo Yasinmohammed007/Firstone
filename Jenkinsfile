@@ -1,3 +1,3 @@
-@Library('centralrepo') _
+@Library('centralrepo@main') _
 welcomeJob 'Testing'
 
