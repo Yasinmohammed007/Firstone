@@ -1,3 +1,6 @@
+@Library('centralrepo') _
+welcomeJob ‘lambdatest’
+
 pipeline {
     agent any
 
