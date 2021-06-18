@@ -1,6 +1,6 @@
 @Library('centralrepo@main') _
-welcomJob (
-    name = 'Testing',
-    desc = 'job'
-)
+welcomJob ([
+    name : 'Testing',
+    desc : 'job'
+])
 
