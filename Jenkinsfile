@@ -1,3 +1,3 @@
 @Library('centralrepo') _
-sample1
+welcomeJob 'Testing'
 
