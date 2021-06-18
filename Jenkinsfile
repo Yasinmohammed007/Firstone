@@ -1,5 +1,5 @@
 @Library('centralrepo') _
-welcomeJob ‘lambdatest’
+welcomeJob 'lambdatest'
 
 pipeline {
     agent any
