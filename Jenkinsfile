@@ -1,5 +1,5 @@
 @Library('centralrepo@main') _
-sampleNew1 {[
+welcomJob {[
     brname = 'test',
     name = 'jaffa',
     list_task = ['checkout','build']
