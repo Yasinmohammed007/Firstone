@@ -4,7 +4,7 @@ welcomJob {[
     name = 'jaffa',
     test_code_location = 'src/tests',
     chart_location = 'deploy',
-    chart_name = 'samplechart',
+    chart_name = 'sampleChart',
     list_task = ['checkout','build']
 ]}
 
