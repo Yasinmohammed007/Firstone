@@ -1,7 +1,7 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "sampleChart.name" -}}
+{{- define "samplechart.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
@@ -10,7 +10,7 @@ Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 If release name contains chart name it will be used as a full name.
 */}}
-{{- define "sampleChart.fullname" -}}
+{{- define "samplechart.fullname" -}}
 {{- if .Values.fullnameOverride }}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
@@ -26,16 +26,16 @@ If release name contains chart name it will be used as a full name.
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "sampleChart.chart" -}}
+{{- define "samplechart.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
 Common labels
 */}}
-{{- define "sampleChart.labels" -}}
-helm.sh/chart: {{ include "sampleChart.chart" . }}
-{{ include "sampleChart.selectorLabels" . }}
+{{- define "samplechart.labels" -}}
+helm.sh/chart: {{ include "samplechart.chart" . }}
+{{ include "samplechart.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -45,17 +45,17 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{/*
 Selector labels
 */}}
-{{- define "sampleChart.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "sampleChart.name" . }}
+{{- define "samplechart.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "samplechart.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
 Create the name of the service account to use
 */}}
-{{- define "sampleChart.serviceAccountName" -}}
+{{- define "samplechart.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create }}
-{{- default (include "sampleChart.fullname" .) .Values.serviceAccount.name }}
+{{- default (include "samplechart.fullname" .) .Values.serviceAccount.name }}
 {{- else }}
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
