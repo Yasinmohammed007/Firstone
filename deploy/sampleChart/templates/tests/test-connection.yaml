@@ -8,6 +8,7 @@ metadata:
     "helm.sh/hook": test
 spec:
   containers:
-    - name: wget
+    - name: pythondocker
       image: python-docker
+      tag: latest
   restartPolicy: Never
