@@ -7,6 +7,6 @@ metadata:
 spec:
   containers:
     - name: pythondocker
-      image: python-docker
-      tag: latest
+      image: python-docker:latest
+      imagePullPolicy: Never
   restartPolicy: Never
