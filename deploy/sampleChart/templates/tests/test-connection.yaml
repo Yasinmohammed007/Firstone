@@ -9,7 +9,5 @@ metadata:
 spec:
   containers:
     - name: wget
-      image: busybox
-      command: ['wget']
-      args: ['{{ include "samplechart.fullname" . }}:{{ .Values.service.port }}']
+      image: python-docker
   restartPolicy: Never
