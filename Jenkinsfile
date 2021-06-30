@@ -1,5 +1,5 @@
 @Library('centralrepo@main') _
-welcomJob {[
+componentTest {[
     brname = 'test',
     name = 'jaffa',
     test_code_location = 'src/tests',
