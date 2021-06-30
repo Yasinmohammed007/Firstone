@@ -1,4 +1,5 @@
 @Library('centralrepo@main') _
+checkout scm
 componentTest {[
     brname = 'test',
     name = 'jaffa',
