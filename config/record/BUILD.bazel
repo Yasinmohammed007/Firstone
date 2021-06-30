@@ -1,0 +1,13 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "record",
+    srcs = ["record.go"],
+    importpath = "github.com/SophosNSG/paloma-config-service/config/record",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@com_github_openconfig_goyang//pkg/yang",
+        "@com_github_openconfig_ygot//ygot",
+        "@com_github_openconfig_ygot//ytypes",
+    ],
+)

@@ -1,0 +1,72 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: config-management-deployment
+  labels:
+    app: config-management
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: config-management
+  template:
+    metadata:
+      labels:
+        app: config-management
+    spec:
+      containers:
+      - name: config-management
+        image: paloma-registry-server.com/config-management-service:v3 # Check the naming convention before finally deploying.
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8081
+        env:
+          - name: NATS_URL
+            value: nats.default.svc.cluster.local
+          - name: SIDECAR_HOST
+            value: dnscache.default.svc.cluster.local
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: config-managment-service
+  labels:
+    app: config-managment
+spec:
+  ports:
+    - port: 8081 # check the port which should be exposed by service
+      targetPort: 8081
+  selector:
+    app: config-management
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: config-managment-ingress
+  labels:
+    app: config-management
+spec:
+  rules:
+  - http:
+      paths:
+      - path: / # Also check for the rules which are allowed for the ingress
+        pathType: Prefix
+        backend:
+          service:
+            name: config-managment-service
+            port: 
+              number: 8081
+---
+# apiVersion: traefik.containo.us/v1alpha1
+# kind: IngressRoute
+# metadata:
+#   name: ingressroutetls
+# spec:
+#   routes:
+#   - match: PathPrefix(`/`)
+#     kind: Rule
+#     services:
+#     - name: config-managment-service
+#       port: 8081
+# ___

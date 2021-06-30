@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "cms.name" . }}
+  labels:
+    {{- include "cms.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "cms.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "cms.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: {{ include "cms.name" . }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 8081
+              protocol: TCP
+          env:
+            - name: NATS_URL
+              value: nats.default.svc.cluster.local
+            - name: SIDECAR_HOST
+              value: configsink.default.svc.cluster.local
+            - name: JAEGER_AGENT_HOST
+              value: "jaeger-operator-jaeger-agent.default.svc"
+            - name: JAEGER_AGENT_PORT
+              value: "6831"
+            - name: JAEGER_SAMPLER_TYPE
+              value: "const"
+            - name: JAEGER_SAMPLER_PARAM
+              value: "1"
+            - name: JAEGER_REPORTER_LOG_SPANS
+              value: "false"
+

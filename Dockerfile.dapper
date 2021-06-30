@@ -1,0 +1,24 @@
+FROM ubuntu:bionic
+
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends locales software-properties-common apt-transport-https \
+    curl gpg-agent wget python git default-jdk patch
+
+RUN wget -O - https://bazel.build/bazel-release.pub.gpg | apt-key add - && \
+    echo "deb [arch=amd64] https://storage.googleapis.com/bazel-apt stable jdk1.8" | tee /etc/apt/sources.list.d/bazel.list && \
+    apt-get update && apt-get install bazel-3.4.1 -y && \
+    ln -s /usr/bin/bazel-3.4.1 /usr/bin/bazel
+
+RUN mkdir /build
+
+ENV DAPPER_SOURCE /service-go
+ENV DAPPER_OUTPUT ./output
+WORKDIR ${DAPPER_SOURCE}
+
+RUN mkdir ${DAPPER_SOURCE}/${DAPPER_OUTPUT}
+
+# COPY BUILD WORKSPACE charts/BUILD ./
+# RUN bazel sync
+
+# CMD bazel run //:gazelle; bazel build //:outyet-image; bazel build //charts:service_go_helm; cp -R bazel-bin/* ${DAPPER_OUTPUT}
+CMD bazel run //:gazelle; bazel build //:paloma-config-service-image; cp -R bazel-bin/* ${DAPPER_OUTPUT}

@@ -1,0 +1,1 @@
+sh resources/test-deployment.sh

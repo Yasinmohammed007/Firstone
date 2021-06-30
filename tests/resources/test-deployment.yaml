@@ -1,0 +1,20 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: component-test
+spec:
+  completions: 1
+  parallelism: 1
+  template:
+    metadata:
+      labels:
+        type: component-test
+    spec:
+      containers:
+      - name: component-test
+        image: app-test
+        imagePullPolicy: Never
+        # env:
+        # - name: SERVICE_URL
+        #   value: http://sample-app:50055        
+      restartPolicy: Never      

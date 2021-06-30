@@ -1,0 +1,36 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: config-service
+spec:
+  selector:
+    matchLabels:
+      app: config-service
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: config-service
+    spec:
+      containers:
+      - name: config-service
+        image: bazel:config-service-image
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8081      
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: config-service
+  labels:
+    run: config-service
+spec:
+  selector:
+    app: config-service
+  ports:
+    - protocol: TCP
+      port: 8086
+      targetPort: 8081   

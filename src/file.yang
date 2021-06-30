@@ -1,0 +1,41 @@
+module file {
+	yang-version 1.1;
+	namespace "urn:config:yang:interfaces"; 
+	prefix "dns-config";
+
+	import ietf-inet-types {
+		prefix inet;
+	}
+	// import ietf-yang-types {
+	// 	prefix yang;
+	// }
+	
+	organization	"ABC";
+
+	description	"YANG module for DNS configuration";
+
+	revision 2021-03-03 {
+		description "Initial version";
+	}
+
+	container dnsconfig {
+		leaf DNSFwdSelection {
+			type string {
+				length "1";
+				pattern "[0-3]";
+			}
+			default "0";
+		}
+		leaf rdodhcpserver {
+			type string {
+				length "1";
+				pattern "[0-3]";
+			}
+			default "0";
+		}
+		leaf dns1 {
+			type inet:ipv4-address;
+			mandatory true;
+		}
+	}
+}

@@ -1,0 +1,18 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "src",
+    srcs = [
+        "parser.go",
+        "publisher.go",
+    ],
+    importpath = "github.com/SophosNSG/paloma-config-service/src",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//config/dns",
+        "//config/record",
+        "@com_github_openconfig_ygot//ygot",
+        "@com_github_prnvkv_my_nats//pkg/req-qsub/pub",
+        "@com_github_prnvkv_my_nats//pkg/util",
+    ],
+)

@@ -1,0 +1,60 @@
+module record {
+	yang-version 1;
+	namespace "urn:sophos:xg:config:yang:interfaces"; 
+	prefix "dns-record";
+
+	import ietf-inet-types {
+		prefix inet;
+	}
+	// import ietf-yang-types {
+	// 	prefix yang;
+	// }
+	
+	organization	"Sophos";
+
+	description	"YANG module for DNS Record configuration";
+
+	revision 2021-03-03 {
+		description "Initial version";
+	}
+	
+    container deldnsrecord {
+        list del_fqdn {
+            config false;
+            leaf-list fqdnlist {
+                type string;
+            } 
+        }
+    }
+	container dnsrecord {
+		leaf fqdn {
+			type string;
+		}
+		leaf reverseresolve {
+			type boolean;
+		}
+
+		list ip_list {
+			config false;
+
+			leaf ipaddress {
+				type inet:ipv4-address;
+			}
+			leaf ipfamily {
+				type int8;
+			}
+			leaf iptype {
+				type int8;
+			}
+			leaf ttl {
+				type int8;
+			}
+			leaf weight {
+				type uint32;
+			}
+			leaf isWan {
+				type boolean;
+			}
+		}
+	}
+}
